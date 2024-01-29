@@ -31,17 +31,17 @@ type Pagina = 'SelecionarIngredientes' | 'MostrarReceitas';
 <template>
     <main class="conteudo-principal">
         <SuaLista :ingredientes="ingredientes" />
-        <KeepAlive>
+        <KeepAlive include="SelecionarIngredientes">
             <SelecionarIngredientes
-            v-if="conteudo === 'SelecionarIngredientes'"
-            @adicionar-ingrediente="adicionarIngrediente"
-            @remover-ingrediente="removerIngrediente"
-            @buscar-receitas="navegar('MostrarReceitas')"
+                v-if="conteudo === 'SelecionarIngredientes'"
+                @adicionar-ingrediente="adicionarIngrediente"
+                @remover-ingrediente="removerIngrediente"
+                @buscar-receitas="navegar('MostrarReceitas')"
             />
-
             <MostrarReceitas 
                 v-else-if="conteudo === 'MostrarReceitas'"
                 @editar-receitas="navegar('SelecionarIngredientes')"
+                :ingredientes="ingredientes"
             />
         </KeepAlive>
     </main>
